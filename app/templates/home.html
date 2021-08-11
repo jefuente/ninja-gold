@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ninja Gold</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+    
+</head>
+<body>
+    <br/>
+    <span class="space" >Tu Oro:</span>
+    <input type="btn" style = "text-align: right" name="valor" value={{oro}}>
+    <br/>
+    <br/>
+    
+    <div class="contenedor">
+
+        <div class="caja-form">
+            <h3>Granja</h3>
+            <p>(Ganas 10-20 Monedas)</p>
+
+            <form action="/process_money" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="valor" value="granja">
+                <input class="btn" type="submit" value="Encontrar Oro!">
+            </form>
+        </div>  
+        <div class="caja-form">
+            <h3>Cueva</h3>
+            <p>(Ganas 5-10 Monedas)</p>
+
+            <form action="/process_money" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="valor" value="cueva">
+                <input class="btn" type="submit" value="Encontrar Oro!">
+            </form>
+        </div>   
+        <div class="caja-form">
+            <h3>Casa</h3>
+            <p>(Ganas 2-5 Monedas)</p>
+
+            <form action="/process_money" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="valor" value="casa">
+                <input class="btn" type="submit" value="Encontrar Oro!">
+            </form>
+        </div>    
+        <div class="caja-form">
+            <h3>Casino</h3>
+            <p>(Ganas/Pierdes 0-50 Monedas)</p>
+
+            <form action="/process_money" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="valor" value="casino">
+                <input class="btn" type="submit" value="Encontrar Oro!">
+            </form>
+        </div>    
+    </div> 
+    
+    <h3>Actividades:</h3>
+    <div id="scrolling" class="caja-grande">
+        <ul>
+            {% for log in logs%}
+                <li class="color-{{log.color}}">{{log.texto}}</li> 
+            {% endfor %}
+        </ul>
+    </div> 
+        
+    <a class="btn btngrande" href="/limpiar">Resetear Valores</a>
+
+    <script>
+
+    var elem = document.getElementById('scroll');
+    elem.scrollTop = elem.scrollHeight;
+
+    </script>
+</body>
+</html>
